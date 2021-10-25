@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeComponent from './HomeComponent';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTask, deleteTask, checkTask, fetchTasks, addTaskService } from '../../actions/todo';
+import { useDispatch } from 'react-redux';
+import { fetchTasks, addTaskService } from '../../actions/todo';
 
 const HomeContainer = ({ navigation }) => {
 
-  const tasksStates = useSelector(state => state.todoReducer);
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -20,21 +19,17 @@ const HomeContainer = ({ navigation }) => {
     dispatch(addTaskService(task));
   }
 
-  const handleCheckTask = (id) => {
-    dispatch(checkTask(id));
-  }
-
-  const handleDeleteTask = (id) => {
-    dispatch(deleteTask(id));
+  const taskDetails = (id) => {
+    navigation.navigate('Another', {
+      id
+    });
   }
 
   return (
     <HomeComponent 
       saveTask={saveTask}
-      deleteTask={handleDeleteTask}
-      checkTask={handleCheckTask}
-      tasks={tasksStates.tasks}
       navigation={navigation}
+      taskDetails={taskDetails}
     />
   )
 }

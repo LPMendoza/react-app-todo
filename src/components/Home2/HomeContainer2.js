@@ -3,7 +3,7 @@ import HomeComponent from './HomeComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTask, deleteTask, checkTask, fetchTasks, addTaskService } from '../../actions/todo';
 
-const HomeContainer2 = ({ navigation }) => {
+const HomeContainer2 = ({ route, navigation }) => {
 
   const tasksStates = useSelector(state => state.todoReducer);
   const dispatch = useDispatch();
@@ -35,6 +35,7 @@ const HomeContainer2 = ({ navigation }) => {
       checkTask={handleCheckTask}
       tasks={tasksStates.tasks}
       navigation={navigation}
+      name={route.params.name}
     />
   )
 }

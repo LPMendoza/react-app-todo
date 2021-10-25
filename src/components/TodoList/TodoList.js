@@ -1,5 +1,7 @@
 import React from 'react';
 import { FlatList, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import { checkTask, deleteTask } from '../../actions/todo';
 
 const styleUnChecked = {
   padding: 16,
@@ -31,7 +33,7 @@ const styleChecked = {
 };
 
 
-const TodoList = ({ tasks, deleteTask, checkTask }) => {
+const TodoList = ({ tasks, taskDetails, handleCheckTask, handleDeleteTask }) => {
   
   const checked = 0;
 
@@ -51,7 +53,7 @@ const TodoList = ({ tasks, deleteTask, checkTask }) => {
           flexDirection: "row"
         }}>
           <TouchableOpacity
-            onPress={() => deleteTask(item.id)}
+            onPress={() => handleDeleteTask(item.id)}
           >
             <View style={{
               width: 40,
@@ -67,7 +69,23 @@ const TodoList = ({ tasks, deleteTask, checkTask }) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => checkTask(item.id)}
+            onPress={() => taskDetails(item.id)}
+          >
+            <View style={{
+              width: 40,
+              height: 40,
+              backgroundColor: "#e0e0e0",
+              borderRadius: 20,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: 8
+            }}>
+              <Text>👁️</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleCheckTask(item.id)}
           >
             <View style={{
               width: 40,
@@ -89,7 +107,7 @@ const TodoList = ({ tasks, deleteTask, checkTask }) => {
     <View style={{
     }}>
       <ScrollView style={{
-        paddingTop: 16
+        paddingTop: 16,
       }}>
         <FlatList 
           data={tasks}
@@ -101,4 +119,15 @@ const TodoList = ({ tasks, deleteTask, checkTask }) => {
   )
 }
 
-export default TodoList;
+const mapStateToProps = (state) => ({
+  tasks: state.todoReducer.tasks
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleCheckTask: (id) => dispatch(checkTask(id)),
+    handleDeleteTask: (id) => dispatch(deleteTask(id)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

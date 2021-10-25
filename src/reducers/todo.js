@@ -1,12 +1,19 @@
-import { ADD, DELETE, CHECK, GET } from "../actions/todo";
+import { ADD, DELETE, CHECK, GET, GETTING, GET_TASK } from "../actions/todo";
 const initialState = {
-  tasks: []
+  tasks: [],
+  task_showed: {
+    value: ""
+  },
 };
 
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GETTING:
+      return {...state, isFetching: true};
     case GET:
-      return {tasks: action.payload};
+      return {tasks: action.payload, isFetching: false};
+    case GET_TASK:
+      return {...state, task_showed: action.payload};
     case ADD:
       return {tasks: [...state.tasks, action.payload]}
     case DELETE:

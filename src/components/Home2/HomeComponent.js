@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import TodoList from '../TodoList/TodoList';
 
-const HomeComponent2 = ({navigation, tasks, saveTask, deleteTask, checkTask}) => {
+const HomeComponent2 = ({navigation, tasks, saveTask, deleteTask, checkTask, name}) => {
 
   const [value, setValue] = useState([]);
 
@@ -108,11 +108,7 @@ const HomeComponent2 = ({navigation, tasks, saveTask, deleteTask, checkTask}) =>
         </TouchableOpacity>
       </View>
       <View>
-        <TodoList 
-          tasks={tasks}
-          deleteTask={deleteTask}
-          checkTask={checkTask}
-        />
+        <Text>{name}</Text>
       </View>
     </View>
   )

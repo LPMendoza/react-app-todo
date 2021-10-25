@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, KeyboardAvoidingView, Text, TextInput, TouchableOpacity } from 'react-native';
 import TodoList from '../TodoList/TodoList';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
-const HomeComponent = ({ navigation, tasks, saveTask, deleteTask, checkTask }) => {
+const HomeComponent = ({ navigation, saveTask, taskDetails, isFetching }) => {
 
   const [value, setValue] = useState([]);
+  const [name, setName] = useState('Pedro');
+  const params = {
+    name
+  }
   const handleSaveTask = (e) => {
     saveTask(value)
   }
@@ -39,7 +44,7 @@ const HomeComponent = ({ navigation, tasks, saveTask, deleteTask, checkTask }) =
             marginBottom: 16,
             fontWeight: "bold"
           }}>Todo App</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Home2')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Home2', params)}>
             <View style={{
               backgroundColor: "#f5f5f5",
               borderRadius: 10,
@@ -76,16 +81,22 @@ const HomeComponent = ({ navigation, tasks, saveTask, deleteTask, checkTask }) =
           </View>
         </TouchableOpacity>
       </View>
-      <View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <TodoList 
-          tasks={tasks}
-          deleteTask={deleteTask}
-          checkTask={checkTask}
+          taskDetails={taskDetails}
         />
-      </View>
+      </KeyboardAvoidingView>
+      { isFetching && <LoadingScreen /> }
     </View>
   )
 
 }
 
-export default HomeComponent;
+
+const mapStateToProps = (state) => ({
+  isFetching: state.todoReducer.isFetching
+})
+
+export default connect(mapStateToProps)(HomeComponent);

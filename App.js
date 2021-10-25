@@ -1,19 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import HomeContainer from './src/components/Home';
 import HomeContainer2 from './src/components/Home2/HomeContainer2';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { fetchTask } from './src/actions/todo';
 import store from './src/store';
 
 const Stack = createNativeStackNavigator();
 
-const AnotherPage = ({navigation}) => {
+const AnotherPage = ({route, navigation}) => {
+
+  const task_showed = useSelector((state) => state.todoReducer.task_showed);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchTask(route.params.id));
+  }, []);
+
   return (
-    <View>
-      <Text>Another Page</Text>
+    <View
+      style={{
+        padding: 32
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 32,
+          color: '#333'
+        }}
+      >Details</Text>
+
+      <Text
+        style={{
+          fontSize: 24,
+          marginTop: 16,
+          marginBottom: 24,
+          color: '#333'
+        }}
+      >
+        {task_showed && task_showed.value}
+      </Text>
 
       <TouchableOpacity onPress={() => navigation.popToTop()}>
         <View style={{
