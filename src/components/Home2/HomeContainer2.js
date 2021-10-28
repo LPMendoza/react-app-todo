@@ -4,40 +4,38 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTask, deleteTask, checkTask, fetchTasks, addTaskService } from '../../actions/todo';
 
 const HomeContainer2 = ({ route, navigation }) => {
-
-  const tasksStates = useSelector(state => state.todoReducer);
+  const tasksStates = useSelector((state) => state.todoReducer);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     getTasks();
   }, []);
 
   const getTasks = () => {
     dispatch(fetchTasks());
-  }
+  };
 
   const saveTask = (task) => {
     dispatch(addTaskService(task));
-  }
+  };
 
   const handleCheckTask = (id) => {
     dispatch(checkTask(id));
-  }
+  };
 
   const handleDeleteTask = (id) => {
     dispatch(deleteTask(id));
-  }
+  };
 
   return (
-    <HomeComponent 
+    <HomeComponent
       saveTask={saveTask}
       deleteTask={handleDeleteTask}
       checkTask={handleCheckTask}
       tasks={tasksStates.tasks}
       navigation={navigation}
-      name={route.params.name}
     />
-  )
-}
+  );
+};
 
 export default HomeContainer2;

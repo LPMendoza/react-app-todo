@@ -12,13 +12,12 @@ const LoadingScreen = ({ isFetching }) => {
         justifyContent: 'center',
         backgroundColor: '#f5f5f5',
         width: '100%',
-        height: '100%'
+        height: '100%',
       }}
     >
       <Text>Loading...</Text>
     </View>
-  )
-}
-
+  );
+};
 
 export default LoadingScreen;

@@ -1,34 +1,38 @@
-import { ADD, DELETE, CHECK, GET, GETTING, GET_TASK } from "../actions/todo";
-const initialState = {
+import { Map, fromJS } from 'immutable';
+import { ADD, DELETE, CHECK, GET, GETTING, GET_TASK } from '../actions/todo';
+const initialState = Map({
   tasks: [],
   task_showed: {
-    value: ""
+    value: '',
   },
-};
+});
 
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case GETTING:
-      return {...state, isFetching: true};
+      return state.set('isFetching', true);
     case GET:
-      return {tasks: action.payload, isFetching: false};
+      return Map({ tasks: action.payload, isFetching: false, error: false });
     case GET_TASK:
-      return {...state, task_showed: action.payload};
+      return state.merge({ task_showed: action.payload });
     case ADD:
-      return {tasks: [...state.tasks, action.payload]}
+      return state.set('tasks', action.payload);
     case DELETE:
-      return {tasks: state.tasks.filter((task) => task.id != action.payload.id)};
+      return Map({
+        ...state,
+        tasks: state.get('tasks').filter((task) => task.id != action.payload.id),
+      });
     case CHECK:
       let indexUpdate;
-      state.tasks.forEach((task, index) => {
+      state.get('tasks').forEach((task, index) => {
         task.id == action.payload.id && (indexUpdate = index);
       });
-      let copyTask = Object.assign([], state.tasks);
+      let copyTask = Object.assign([], state.get('tasks'));
       copyTask[indexUpdate].status = 0;
-      return {tasks: copyTask};
+      return Map({ tasks: copyTask });
     default:
       return state;
   }
-}
+};
 
 export default todoReducer;
