@@ -4,6 +4,7 @@ import { View, KeyboardAvoidingView, Text, TextInput, TouchableOpacity } from 'r
 import TodoList from '../TodoList/TodoList';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
+
 const HomeComponent = ({ navigation, saveTask, isFetching }) => {
   const [value, setValue] = useState([]);
   const [name, setName] = useState('Pedro');

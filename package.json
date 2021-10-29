@@ -1,9 +1,8 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "web": "expo start --web",
     "eject": "expo eject",
     "prettier-watch": "npx onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
@@ -15,15 +14,18 @@
     "@react-navigation/native-stack": "^6.2.5",
     "axios": "^0.23.0",
     "expo": "~42.0.1",
+    "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
+    "expo-updates": "~0.8.1",
     "immutable": "^4.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native": "~0.63.4",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
+    "react-native-unimodules": "0.14.10",
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.5",
     "redux": "^4.1.1",
@@ -32,8 +34,17 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "babel-preset-airbnb": "^5.0.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^1.7.0",
     "prettier": "2.4.1"
   },
-  "private": true
+  "private": true,
+  "name": "todo-app",
+  "version": "1.0.0"
 }

@@ -13,11 +13,14 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIndentifier": "com.mendoza.todoapp",
       "buildNumber": "1.0.0",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mendoza.todoapp"
     },
     "android": {
       "package": "com.mendoza.todoapp",
